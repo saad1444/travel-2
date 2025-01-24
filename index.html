@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Website</title>
+    <script type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+    </script>
+    <script type="text/javascript">
+    (function(){
+        emailjs.init({
+            publicKey: "iMaD9R_egHiawPAuT",
+        });
+    })();
+    </script>
+
+
+    <!-- Font Awesome CDN for social icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f0f0f0;
+            color: #333;
+        }
+
+        header {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        nav {
+    background-color: #444; /* Dark background color */
+    padding: 15px;
+    text-align: center;
+    border-radius: 8px; /* Rounded corners for smooth look */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Shadow for depth */
+}
+
+nav ul {
+    list-style: none;
+    display: inline-flex;
+    justify-content: center; /* Center the navbar items */
+    align-items: center;
+}
+
+nav ul li {
+    margin: 0 20px; /* Increased space between links */
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 500; /* Slightly bolder text */
+    padding: 10px 20px; /* Padding for better clickable area */
+    border-radius: 5px; /* Rounded links for smooth look */
+    transition: all 0.3s ease; /* Smooth transition for hover effect */
+    position: relative; /* To position underline effect */
+}
+
+nav ul li a:hover {
+    color: #ff9800; /* Text color on hover */
+    background-color: rgba(255, 152, 0, 0.2); /* Background effect on hover */
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Glowing effect */
+    transform: translateY(-3px); /* Lift effect on hover */
+}
+
+nav ul li a:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: #ff9800; /* Underline color */
+    transition: width 0.3s ease; /* Underline animation */
+}
+
+nav ul li a:hover:after {
+    width: 100%; /* Underline grows on hover */
+}
+
+
+        .section {
+            padding: 30px;
+            display: none;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        .destination-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+
+
+
+        
+
+        .destination-card {
+            width: 30%;
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .destination-card img {
+            width: 100%;
+            border-radius: 8px;
+        }
+
+        .destination-card h3 {
+            margin-top: 10px;
+            color: #333;
+        }
+
+        .destination-card p {
+            color: #777;
+        }
+
+        .travel-tips {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+
+        .destination-card img {
+    width: 100%;
+    border-radius: 8px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.destination-card img:hover {
+    transform: scale(1.1); /* Enlarges the image slightly */
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3); /* Adds a stronger shadow for emphasis */
+}
+
+
+        .contact-form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 50%;
+            margin: 0 auto;
+        }
+
+        .contact-form label {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .contact-form input, .contact-form textarea, .contact-form select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .contact-form input[type="submit"] {
+            background-color: #ff9800;
+            color: white;
+            cursor: pointer;
+            border: none;
+        }
+
+        .contact-form input[type="submit"]:hover {
+            background-color: #f57c00;
+        }
+
+        footer {
+            text-align: center;
+            padding: 15px;
+            background-color: #333;
+            color: white;
+            margin-top: 40px;
+        }
+
+        .booking-form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 50%;
+            margin: 0 auto;
+        }
+
+        .booking-form label {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .booking-form input, .booking-form select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .booking-form input[type="submit"] {
+            background-color: #ff9800;
+            color: white;
+            cursor: pointer;
+            border: none;
+        }
+
+        .booking-form input[type="submit"]:hover {
+            background-color: #f57c00;
+        }
+        footer {
+    background-color: #333;
+    color: white;
+    padding: 30px;
+    text-align: center;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    margin-top: 160px;
+}
+
+footer p {
+    margin: 0;
+}
+
+/* Footer Styling */
+footer {
+    background-color: #333;
+    color: white;
+    padding: 40px 20px;
+    text-align: left;
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+.footer-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.footer-logo {
+    flex: 1;
+    margin-bottom: 20px;
+}
+
+.footer-logo h3 {
+    font-size: 24px;
+    margin: 0;
+    font-weight: bold;
+}
+
+.footer-logo p {
+    font-size: 14px;
+    color: #ccc;
+}
+
+.footer-links, .footer-contact, .footer-social {
+    flex: 1;
+    margin: 0 10px;
+}
+
+.footer-links h4, .footer-contact h4, .footer-social h4 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #fff;
+}
+
+.footer-links ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-links ul li {
+    margin-bottom: 8px;
+}
+
+.footer-links ul li a {
+    text-decoration: none;
+    color: #ccc;
+    font-size: 14px;
+}
+
+.footer-links ul li a:hover {
+    color: #fff;
+}
+
+.footer-contact p, .footer-social a {
+    font-size: 14px;
+    color: #ccc;
+    margin-bottom: 10px;
+}
+
+.footer-social a {
+    display: inline-block;
+    margin-right: 15px;
+    text-decoration: none;
+}
+
+.footer-social a:hover {
+    color: #fff;
+}
+
+.footer-bottom {
+    text-align: center;
+    margin-top: 20px;
+    width: 100%;
+    font-size: 14px;
+    color: #ccc;
+}
+
+.footer-bottom p {
+    margin: 0;
+}
+
+ /* Responsive Design */
+ @media (max-width: 768px) {
+            .destination-card {
+                flex: 1 1 calc(50% - 20px); /* Two cards per row on medium screens */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .destination-card {
+                flex: 1 1 calc(100% - 20px); /* Full width on very small screens */
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <h1>Travel with FM Faisal Movers</h1>
+        <p>Your gateway to the best travel experiences!</p>
+    </header>
+
+    <!-- Navbar -->
+    <nav>
+        <ul>
+            <li><a href="#" onclick="showSection('home')">Home</a></li>
+            <li><a href="#" onclick="showSection('destinations')">Destinations</a></li>
+            <li><a href="#" onclick="showSection('travel-tips')">Travel Tips</a></li>
+            <li><a href="#" onclick="showSection('contact')">Contact</a></li>
+            <li><a href="#" onclick="showSection('booking')">Book Now</a></li>
+        </ul>
+    </nav>
+
+    <!-- Home Section -->
+<div id="home" class="section active">
+    <h2>Welcome to Travel with Faisal Movers</h2> <br>
+    <p>Explore the world with our amazing travel packages and tips. Whether you’re a solo traveler, a family, or a group of friends, we offer customized travel experiences tailored to your needs. Our carefully curated packages include guided tours, luxury accommodations, and local experiences that bring you closer to the destinations you love.</p> <br>
+    <p>Let us take you to the most breathtaking destinations around the globe, from the sun-kissed beaches of the Maldives to the historical wonders of Rome, or the tranquil landscapes of the Swiss Alps. With Travel with <b>Faisal Movers</b>, your adventure starts here!</p>
+    <p>Our team of experts is dedicated to providing you with all the travel information and resources you need for an unforgettable journey. Stay updated with our travel blogs, tips, and recommendations to make your trip seamless and enjoyable. Don’t just travel, travel with <b>Faisal Movers</b>,  make memories that will last a lifetime!</p>
+</div>
+
+<!-- About Section -->
+<div id="about" class="section">
+    <h2>About Us</h2>
+    <p>Travel with Us is more than just a travel agency; it’s a journey of discovery, excitement, and memories. We believe in creating travel experiences that not only take you to new places but also immerse you in the culture, history, and essence of the destination. Our mission is to make travel easy, affordable, and memorable for everyone.</p>
+
+    <p>Our team consists of passionate travel experts who have explored the world and are dedicated to curating exceptional experiences for you. We offer a variety of services ranging from vacation packages, personalized itineraries, and group tours to solo adventures, cruises, and adventure travel.</p>
+
+    <p>Our vision is simple – to be your trusted travel partner, providing seamless services, unique experiences, and unforgettable memories. Whether you're looking to relax on a tropical beach, hike through scenic mountains, or dive into the rich history of ancient cities, we have something for everyone. At Travel with Us, we make it possible for you to live your travel dreams.</p>
+
+    <h3>Why Choose Us?</h3>
+    <ul>
+        <li><strong>Expert Knowledge:</strong> Our travel experts have years of experience and extensive knowledge of the best destinations around the world.</li>
+        <li><strong>Personalized Services:</strong> We offer tailored travel packages that suit your preferences, ensuring your trip is exactly what you envision.</li>
+        <li><strong>Affordable Prices:</strong> We strive to offer the best value for your money, making travel more accessible to all.</li>
+        <li><strong>Comprehensive Support:</strong> From booking flights and accommodations to offering local tips and recommendations, we are here to support you every step of the way.</li>
+        <li><strong>Safe and Secure Travel:</strong> Your safety is our priority. We work with trusted partners to ensure you have a smooth and worry-free trip.</li>
+    </ul>
+
+    <h3>Our Commitment to Sustainability</h3>
+    <p>We are committed to sustainable travel practices that minimize our impact on the environment. From eco-friendly accommodations to supporting local communities, we aim to contribute positively to the places we visit. By choosing Travel with Us, you’re supporting responsible travel that helps protect the natural beauty of the world for future generations.</p>
+
+    <p>Ready to start your journey? Explore our travel packages or contact us for a customized plan that suits your unique travel needs. With Travel with Us, the world is at your feet.</p>
+</div>
+
+    <!-- Destinations Section -->
+<div id="destinations" class="section">
+    <h2>Top Destinations</h2><br>
+    <div class="destination-grid">
+        <div class="destination-card">
+            <img src="istockphoto-1257291407-612x612.webp" alt="Destination 1">
+            <h3>Paris, France</h3>
+            <p>The city of love, art, and culture.</p>
+        </div>
+        <div class="destination-card">
+            <img src="premium_photo-1661874304749-56dcd4f33f8d.avif" alt="Destination 2">
+            <h3>Bali, Indonesia</h3>
+            <p>A tropical paradise known for its beaches and temples.</p>
+        </div>
+        <div class="destination-card">
+            <img src="asad1.avif" alt="Destination 3">
+            <h3>Tokyo, Japan</h3>
+            <p>A bustling metropolis blending modernity and tradition.</p>
+        </div>
+        
+        <div class="destination-card">
+            <img src="asad2.avif" alt="Destination 4">
+            <h3>New York, USA</h3>
+            <p>The city that never sleeps, full of vibrant energy.</p>
+        </div>
+        <div class="destination-card">
+            <img src="asad3.webp" alt="Destination 5">
+            <h3>Dubai, UAE</h3>
+            <p>A futuristic city with incredible architecture and shopping.</p>
+        </div>
+        <div class="destination-card">
+            <img src="asad4.webp" alt="Destination 6">
+            <h3>London, UK</h3>
+            <p>A city steeped in history with a modern twist.</p>
+        </div>
+        
+        <div class="destination-card">
+            <img src="asd5.avif" alt="Destination 7">
+            <h3>Rome, Italy</h3>
+            <p>The heart of ancient history and architecture.</p>
+        </div>
+        <div class="destination-card">
+            <img src="asad6.avif" alt="Destination 8">
+            <h3>Barcelona, Spain</h3>
+            <p>A vibrant city filled with art, culture, and beaches.</p>
+        </div>
+        <div class="destination-card">
+            <img src="asad8.avif" alt="Destination 9">
+            <h3>Sydney, Australia</h3>
+            <p>Famous for its beautiful harbour and iconic opera house.</p>
+        </div>
+        
+        <div class="destination-card">
+            <img src="asad9.avif" alt="Destination 10">
+            <h3>Dubai, UAE</h3>
+            <p>A city of innovation, luxury, and breathtaking views.</p>
+        </div>
+        <div class="destination-card">
+            <img src="asad11.webp" alt="Destination 11">
+            <h3>Bangkok, Thailand</h3>
+            <p>Vibrant city known for its street food and temples.</p>
+        </div>
+        <div class="destination-card">
+            <img src="asad12.avif" alt="Destination 12">
+            <h3>Cape Town, South Africa</h3>
+            <p>A beautiful coastal city with stunning landscapes.</p>
+        </div>
+        
+        <!-- Additional Destinations -->
+        <div class="destination-card">
+            <img src="asad13.webp" alt="Destination 13">
+            <h3>Amsterdam, Netherlands</h3>
+            <p>A city known for its canals, museums, and history.</p>
+        </div>
+        <div class="destination-card">
+            <img src="asad14.avif" alt="Destination 14">
+            <h3>Kyoto, Japan</h3>
+            <p>Famous for its temples, gardens, and traditional culture.</p>
+        </div>
+        <div class="destination-card">
+            <img src="asad15.webp" alt="Destination 15">
+            <h3>Dubai Desert, UAE</h3>
+            <p>Experience the vast beauty and adventure of the desert.</p>
+        </div>
+        
+        <div class="destination-card">
+            <img src="asad16.webp" alt="Destination 16">
+            <h3>Istanbul, Turkey</h3>
+            <p>A city where East meets West, rich in history and culture.</p>
+        </div>
+        <div class="destination-card">
+            <img src="asad17.avif" alt="Destination 17">
+            <h3>Vancouver, Canada</h3>
+            <p>Known for its stunning mountains and vibrant city life.</p>
+        </div>
+        <div class="destination-card">
+            <img src="sad0.webp" alt="Destination 18">
+            <h3>Rio de Janeiro, Brazil</h3>
+            <p>Famous for its beaches, carnival, and lively culture.</p>
+        </div>
+    </div>
+</div>
+
+
+    <!-- Travel Tips Section -->
+    <div id="travel-tips" class="section">
+        <h2>Travel Tips</h2> <br>
+        <div class="travel-tips">
+            <h3>Tip #1: Pack Light</h3>
+            <p>Only bring the essentials and try to pack clothes that can be mixed and matched.</p>
+        </div>
+        <div class="travel-tips">
+            <h3>Tip #2: Stay Safe</h3>
+            <p>Always keep your valuables safe and be aware of your surroundings when traveling.</p>
+        </div>
+        <div class="travel-tips">
+            <h3>Tip #3: Do Your Research</h3>
+            <p>Before visiting a destination, make sure you know about the culture, local customs, and weather.</p>
+        </div>
+    </div>
+
+    <!-- Contact Section -->
+    <div id="contact" class="section">
+        <h2>Contact Us</h2><br>
+        <p>Have any questions? Get in touch with us using the form below:</p><br>
+
+        <form class="contact-form">
+            <label for="name">Your Name:</label><br>
+            <input type="text" id="name" name="name" required><br><br>
+
+            <label for="email">Your Email:</label><br>
+            <input type="email" id="email" name="email" required><br><br>
+
+            <label for="message">Your Message:</label><br>
+            <textarea id="message" name="message" rows="4" required></textarea><br><br>
+
+            <input type="submit" value="Send Message">
+        </form>
+    </div>
+
+    <!-- Booking Section -->
+    <div id="booking" class="section">
+        <h2>Book Your Trip</h2>
+        <form class="booking-form" id="booking-form" onsubmit="submitBooking(event)">
+            <label for="name">Your Name:</label><br>
+            <input type="text" id="booking-name" name="name" required><br><br>
+
+            <label for="email">Your Email:</label><br>
+            <input type="email" id="booking-email" name="email" required><br><br>
+
+            <label for="destination">Select Destination:</label><br>
+            <select id="destination" name="destination" required>
+                <option value="Paris, France">Paris, France</option>
+                <option value="Bali, Indonesia">Bali, Indonesia</option>
+                <option value="Tokyo, Japan">Tokyo, Japan</option>
+                <option value="New York, USA">New York, USA</option>
+                <option value="Dubai, UAE">Dubai, UAE</option>
+                <option value="London, UK">London, UK</option>
+                <option value="Rome, Italy">Rome, Italy</option>
+                <option value="Barcelona, Spain">Barcelona, Spain</option>
+                <option value="Sydney, Australia">Sydney, Australia</option>
+                <option value="Bangkok, Thailand">Bangkok, Thailand</option>
+                <option value="Cape Town, South Africa">Cape Town, South Africa</option>
+                <option value="Istanbul, Turkey">Istanbul, Turkey</option>
+                <option value="Rio de Janeiro, Brazil">Rio de Janeiro, Brazil</option>
+                <option value="Kyoto, Japan">Kyoto, Japan</option>
+                <option value="Santorini, Greece">Santorini, Greece</option>
+            </select><br><br>
+            
+
+            <label for="date">Travel Date:</label><br>
+            <input type="date" id="travel-date" name="date" required><br><br>
+
+            <input type="submit" value="Confirm Booking">
+        </form>
+    </div>
+
+   <!-- Footer -->
+    
+<footer>
+    <div class="footer-content">
+        <div class="footer-logo">
+            <h3>Travel with Faisal Movers</h3><br>
+            <p>Your gateway to unforgettable travel experiences.</p>
+        </div>
+        
+        <div class="footer-links">
+            <h4>Quick Links</h4>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Contact</a></li>
+                <li><a href="#">Packages</a></li>
+                <li><a href="#">Blog</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-contact">
+            <h4>Contact Us</h4>
+            <p>Email: saad@gmail.com</p>
+            <p>Phone: 09876543212</p>
+            <p>Address: Al asif Square Gulshan Karachi.</p>
+        </div>
+
+        <div class="footer-social">
+            <h4>Follow Us</h4>
+            <a href="https://www.Facebook.com">Facebook</a>
+            <a href="https://www.Instagram.com">Instagram</a>
+            <a href="https://www.Twitter.com">Twitter</a>
+            <a href="https://www.LinkedIn.com">LinkedIn</a>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <p>&copy; 2025 Travel with <b>Faisal Movers</b>. All rights reserved.</p>
+    </div>
+</footer>
+
+
+    <script>
+
+function submit(){
+            let userName = document.getElementById("name").value;
+            let userEmail = document.getElementById("email").value;
+            // let subject = document.getElementById("subject").value;
+            let userMessage = document.getElementById("message").value;
+
+            let params = {
+                name: userName,
+                email: userEmail,
+                // subject: subject,
+                message: userMessage
+            }
+            ///             Service ID      Template ID        Object
+            emailjs.send("service_rr6i3p7", "template_o8rijxq", params)
+            .then((res) => {
+                alert("Query Sent")
+                console.log(res)
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+        }
+        function showSection(sectionId) {
+            // Hide all sections
+            document.querySelectorAll('.section').forEach(function(section) {
+                section.classList.remove('active');
+            });
+            // Show the selected section
+            document.getElementById(sectionId).classList.add('active');
+        }
+
+        function submitBooking(event) {
+            event.preventDefault();
+            const name = document.getElementById('booking-name').value;
+            const email = document.getElementById('booking-email').value;
+            const destination = document.getElementById('destination').value;
+            const date = document.getElementById('travel-date').value;
+
+            // Show confirmation alert
+            alert(`Your booking is confirmed! \nName: ${name} \nEmail: ${email} \nDestination: ${destination} \nTravel Date: ${date}`);
+        }
+    </script>
+
+</body>
+</html>
